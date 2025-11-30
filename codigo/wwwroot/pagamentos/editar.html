@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Pagamento</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body class="container mt-4">
+
+    <h2>Editar Pagamento</h2>
+    <a href="listar.html" class="btn btn-secondary mb-3">← Voltar</a>
+
+    <form id="form"></form>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get("id");
+        const form = document.getElementById("form");
+
+        async function carregar() {
+            const req = await fetch(`/api/pagamentos/${id}`);
+            const p = await req.json();
+
+            form.innerHTML = `
+                <label>ID Aluguel</label>
+                <input id="aluguel" type="number" class="form-control" value="${p.idAluguel}">
+
+                <label class="mt-2">Data Pagamento</label>
+                <input id="data" type="date" class="form-control" value="${p.dataPagamento.substring(0, 10)}">
+
+                <label class="mt-2">Valor Pago</label>
+                <input id="valor" type="number" step="0.01" class="form-control" value="${p.valorPago}">
+
+                <label class="mt-2">Forma Pagamento</label>
+                <input id="forma" class="form-control" value="${p.formaPagamento}">
+
+                <button class="btn btn-success mt-3">Salvar Alterações</button>
+            `;
+        }
+
+        document.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const patch = [];
+
+            patch.push({ op: "replace", path: "/idAluguel", value: Number(aluguel.value) });
+            patch.push({ op: "replace", path: "/dataPagamento", value: data.value + "T00:00:00" });
+            patch.push({ op: "replace", path: "/valorPago", value: Number(valor.value) });
+            patch.push({ op: "replace", path: "/formaPagamento", value: forma.value });
+
+            await fetch(`/api/pagamentos/${id}`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(patch)
+            });
+
+            alert("Pagamento atualizado!");
+            window.location.href = "listar.html";
+        });
+
+        carregar();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Cliente</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body class="container mt-4">
+
+    <h2>Novo Cliente</h2>
+    <a href="listar.html" class="btn btn-secondary mb-3">← Voltar</a>
+
+    <form id="form">
+        <label>Nome</label>
+        <input class="form-control" id="nome">
+
+        <label class="mt-2">CPF</label>
+        <input class="form-control" id="cpf">
+
+        <label class="mt-2">Email</label>
+        <input class="form-control" id="email">
+
+        <label class="mt-2">Telefone</label>
+        <input class="form-control" id="telefone">
+
+        <button class="btn btn-success mt-3">Salvar</button>
+    </form>
+
+    <script>
+        document.getElementById("form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            await fetch("/api/clientes", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    nome: nome.value,
+                    cpf: cpf.value,
+                    email: email.value,
+                    telefone: telefone.value
+                })
+            });
+
+            alert("Cliente cadastrado!");
+            window.location.href = "listar.html";
+        });
+    </script>
+
+</body>
+</html>

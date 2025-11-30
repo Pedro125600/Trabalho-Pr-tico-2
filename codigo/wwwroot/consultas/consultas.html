@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Consultas - Sistema de Locadora</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body class="container mt-4">
+
+    <a href="../home.html" class="btn btn-secondary mb-3">← Voltar ao Home</a>
+    <h2 class="mb-4 text-center">Consultas do Sistema</h2>
+
+    <div class="row g-4">
+
+        <!-- Veículos + Fabricante -->
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5>Veículos com Fabricante</h5>
+                    <button class="btn btn-primary w-100" onclick="consulta1()">Carregar</button>
+                    <table class="table table-striped mt-3">
+                        <thead>
+                            <tr>
+                                <th>Modelo</th>
+                                <th>Placa</th>
+                                <th>Fabricante</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tb1"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Aluguéis completos -->
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5>Aluguéis com Cliente e Veículo</h5>
+                    <button class="btn btn-primary w-100" onclick="consulta2()">Carregar</button>
+                    <table class="table table-striped mt-3">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Veículo</th>
+                                <th>Retirada</th>
+                                <th>Devolução</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tb2"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagamentos -->
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5>Pagamentos por Cliente</h5>
+                    <button class="btn btn-primary w-100" onclick="consulta3()">Carregar</button>
+                    <table class="table table-striped mt-3">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Valor Pago</th>
+                                <th>Forma</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tb3"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Clientes por Fabricante -->
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5>Clientes por Fabricante</h5>
+                    <input id="fabid" class="form-control mb-2" placeholder="ID do Fabricante">
+                    <button class="btn btn-primary w-100" onclick="consulta4()">Consultar</button>
+                    <table class="table table-striped mt-3">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Veículo</th>
+                                <th>Fabricante</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tb4"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Histórico Cliente -->
+        <div class="col-md-12">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5>Histórico do Cliente</h5>
+                    <input id="clienteid" class="form-control mb-2" placeholder="ID do Cliente">
+                    <button class="btn btn-primary w-100" onclick="consulta5()">Consultar</button>
+                    <table class="table table-striped mt-3">
+                        <thead>
+                            <tr>
+                                <th>Veículo</th>
+                                <th>Fabricante</th>
+                                <th>Retirada</th>
+                                <th>Devolução</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tb5"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        async function consulta1() {
+            const req = await fetch("/api/consultas/veiculos-com-fabricante");
+            const dados = await req.json();
+            tb1.innerHTML = dados.map(x => `
+                <tr><td>${x.modelo}</td><td>${x.placa}</td><td>${x.fabricante}</td></tr>
+            `).join("");
+        }
+
+        async function consulta2() {
+            const req = await fetch("/api/consultas/alugueis-com-cliente-veiculo");
+            const dados = await req.json();
+            tb2.innerHTML = dados.map(x => `
+                <tr>
+                    <td>${x.cliente}</td>
+                    <td>${x.veiculo}</td>
+                    <td>${x.dataRetirada.substring(0,10)}</td>
+                    <td>${x.dataDevolucao ? x.dataDevolucao.substring(0,10) : ""}</td>
+                </tr>
+            `).join("");
+        }
+
+        async function consulta3() {
+            const req = await fetch("/api/consultas/pagamentos-com-cliente");
+            const dados = await req.json();
+            tb3.innerHTML = dados.map(x => `
+                <tr><td>${x.cliente}</td><td>R$ ${x.valorPago}</td><td>${x.formaPagamento}</td></tr>
+            `).join("");
+        }
+
+        async function consulta4() {
+            let id = fabid.value;
+            if (!id) return alert("Digite o ID do fabricante!");
+
+            const req = await fetch(`/api/consultas/clientes-por-fabricante/${id}`);
+            if (!req.ok) return alert("Não encontrado!");
+
+            const dados = await req.json();
+            tb4.innerHTML = dados.map(x => `
+                <tr><td>${x.cliente}</td><td>${x.veiculo}</td><td>${x.fab}</td></tr>
+            `).join("");
+        }
+
+        async function consulta5() {
+            let id = clienteid.value;
+            if (!id) return alert("Digite o ID do cliente!");
+
+            const req = await fetch(`/api/consultas/historico-cliente/${id}`);
+            if (!req.ok) return alert("Nenhum histórico encontrado!");
+
+            const dados = await req.json();
+            tb5.innerHTML = dados.map(x => `
+                <tr>
+                    <td>${x.veiculo}</td>
+                    <td>${x.fab}</td>
+                    <td>${x.dataRetirada.substring(0,10)}</td>
+                    <td>${x.dataDevolucao ? x.dataDevolucao.substring(0,10) : ""}</td>
+                </tr>
+            `).join("");
+        }
+    </script>
+
+</body>
+</html>

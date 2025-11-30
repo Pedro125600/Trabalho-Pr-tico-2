@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Novo Aluguel</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body class="container mt-4">
+
+    <h2>Novo Aluguel</h2>
+
+    <a href="listar.html" class="btn btn-secondary mb-3">← Voltar</a>
+
+    <form id="form">
+
+        <label>ID Cliente</label>
+        <input class="form-control" id="cliente" required>
+
+        <label class="mt-2">ID Veículo</label>
+        <input class="form-control" id="veiculo" required>
+
+        <label class="mt-2">Data Retirada</label>
+        <input type="date" class="form-control" id="retirada" required>
+
+        <label class="mt-2">Data Devolução</label>
+        <input type="date" class="form-control" id="devolucao" required>
+
+        <label class="mt-2">KM Inicial</label>
+        <input class="form-control" id="km" type="number" required>
+
+        <label class="mt-2">Valor Diária</label>
+        <input class="form-control" id="valor" type="number" required>
+
+        <button class="btn btn-success mt-3">Salvar</button>
+    </form>
+
+    <script>
+        document.getElementById("form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const aluguel = {
+                idCliente: Number(cliente.value),
+                idVeiculo: Number(veiculo.value),
+                dataRetirada: retirada.value,       // ← CORRIGIDO
+                dataDevolucao: devolucao.value,     // ← CORRIGIDO
+                quilometragemInicial: Number(km.value),
+                valorDiaria: Number(valor.value)
+            };
+
+            console.log("Enviando JSON:", aluguel);
+
+            const req = await fetch("/api/alugueis", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(aluguel)
+            });
+
+            console.log("Status backend:", req.status);
+
+            if (!req.ok) {
+                const erro = await req.text();
+                console.error("Resposta do backend:", erro);
+                alert("ERRO 400 DO BACKEND: " + erro);
+                return;
+            }
+
+            alert("Aluguel cadastrado!");
+            window.location.href = "listar.html";
+        });
+    </script>
+
+
+</body>
+</html>

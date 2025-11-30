@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Excluir Veículo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body class="container mt-4">
+
+    <h2>Excluir Veículo</h2>
+    <a href="listar.html" class="btn btn-secondary mb-3">← Voltar</a>
+
+    <div id="dados"></div>
+
+    <button id="btnExcluir" class="btn btn-danger mt-3">Excluir</button>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get("id");
+
+        async function carregar() {
+            const req = await fetch(`/api/veiculos/${id}`);
+            const v = await req.json();
+
+            dados.innerHTML = `
+                <p><strong>Modelo:</strong> ${v.modelo}</p>
+                <p><strong>Placa:</strong> ${v.placa}</p>
+                <p><strong>Fabricante:</strong> ${v.fabricante.nome}</p>
+            `;
+        }
+
+        document.getElementById("btnExcluir").onclick = async () => {
+            await fetch(`/api/veiculos/${id}`, {
+                method: "DELETE"
+            });
+
+            alert("Veículo excluído!");
+            window.location.href = "listar.html";
+        };
+
+        carregar();
+    </script>
+
+</body>
+</html>

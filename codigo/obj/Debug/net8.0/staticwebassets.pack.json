@@ -1,0 +1,109 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Pedro Henrique\\source\\repos\\TrabalhoPraticoPart3\\TrabalhoPraticoPart3\\wwwroot\\alugueis\\criar.html",
+      "PackagePath": "staticwebassets\\alugueis\\criar.html"
+    },
+    {
+      "Id": "C:\\Users\\Pedro Henrique\\source\\repos\\TrabalhoPraticoPart3\\TrabalhoPraticoPart3\\wwwroot\\alugueis\\editar.html",
+      "PackagePath": "staticwebassets\\alugueis\\editar.html"
+    },
+    {
+      "Id": "C:\\Users\\Pedro Henrique\\source\\repos\\TrabalhoPraticoPart3\\TrabalhoPraticoPart3\\wwwroot\\alugueis\\excluir.html",
+      "PackagePath": "staticwebassets\\alugueis\\excluir.html"
+    },
+    {
+      "Id": "C:\\Users\\Pedro Henrique\\source\\repos\\TrabalhoPraticoPart3\\TrabalhoPraticoPart3\\wwwroot\\alugueis\\listar.html",
+      "PackagePath": "staticwebassets\\alugueis\\listar.html"
+    },
+    {
+      "Id": "C:\\Users\\Pedro Henrique\\source\\repos\\TrabalhoPraticoPart3\\TrabalhoPraticoPart3\\wwwroot\\clientes\\criar.html",
+      "PackagePath": "staticwebassets\\clientes\\criar.html"
+    },
+    {
+      "Id": "C:\\Users\\Pedro Henrique\\source\\repos\\TrabalhoPraticoPart3\\TrabalhoPraticoPart3\\wwwroot\\clientes\\editar.html",
+      "PackagePath": "staticwebassets\\clientes\\editar.html"
+    },
+    {
+      "Id": "C:\\Users\\Pedro Henrique\\source\\repos\\TrabalhoPraticoPart3\\TrabalhoPraticoPart3\\wwwroot\\clientes\\excluir.html",
+      "PackagePath": "staticwebassets\\clientes\\excluir.html"
+    },
+    {
+      "Id": "C:\\Users\\Pedro Henrique\\source\\repos\\TrabalhoPraticoPart3\\TrabalhoPraticoPart3\\wwwroot\\clientes\\listar.html",
+      "PackagePath": "staticwebassets\\clientes\\listar.html"
+    },
+    {
+      "Id": "C:\\Users\\Pedro Henrique\\source\\repos\\TrabalhoPraticoPart3\\TrabalhoPraticoPart3\\wwwroot\\consultas\\consultas.html",
+      "PackagePath": "staticwebassets\\consultas\\consultas.html"
+    },
+    {
+      "Id": "C:\\Users\\Pedro Henrique\\source\\repos\\TrabalhoPraticoPart3\\TrabalhoPraticoPart3\\wwwroot\\fabricantes\\criar.html",
+      "PackagePath": "staticwebassets\\fabricantes\\criar.html"
+    },
+    {
+      "Id": "C:\\Users\\Pedro Henrique\\source\\repos\\TrabalhoPraticoPart3\\TrabalhoPraticoPart3\\wwwroot\\fabricantes\\editar.html",
+      "PackagePath": "staticwebassets\\fabricantes\\editar.html"
+    },
+    {
+      "Id": "C:\\Users\\Pedro Henrique\\source\\repos\\TrabalhoPraticoPart3\\TrabalhoPraticoPart3\\wwwroot\\fabricantes\\excluir.html",
+      "PackagePath": "staticwebassets\\fabricantes\\excluir.html"
+    },
+    {
+      "Id": "C:\\Users\\Pedro Henrique\\source\\repos\\TrabalhoPraticoPart3\\TrabalhoPraticoPart3\\wwwroot\\fabricantes\\listar.html",
+      "PackagePath": "staticwebassets\\fabricantes\\listar.html"
+    },
+    {
+      "Id": "C:\\Users\\Pedro Henrique\\source\\repos\\TrabalhoPraticoPart3\\TrabalhoPraticoPart3\\wwwroot\\home.html",
+      "PackagePath": "staticwebassets\\home.html"
+    },
+    {
+      "Id": "C:\\Users\\Pedro Henrique\\source\\repos\\TrabalhoPraticoPart3\\TrabalhoPraticoPart3\\wwwroot\\pagamentos\\criar.html",
+      "PackagePath": "staticwebassets\\pagamentos\\criar.html"
+    },
+    {
+      "Id": "C:\\Users\\Pedro Henrique\\source\\repos\\TrabalhoPraticoPart3\\TrabalhoPraticoPart3\\wwwroot\\pagamentos\\editar.html",
+      "PackagePath": "staticwebassets\\pagamentos\\editar.html"
+    },
+    {
+      "Id": "C:\\Users\\Pedro Henrique\\source\\repos\\TrabalhoPraticoPart3\\TrabalhoPraticoPart3\\wwwroot\\pagamentos\\excluir.html",
+      "PackagePath": "staticwebassets\\pagamentos\\excluir.html"
+    },
+    {
+      "Id": "C:\\Users\\Pedro Henrique\\source\\repos\\TrabalhoPraticoPart3\\TrabalhoPraticoPart3\\wwwroot\\pagamentos\\listar.html",
+      "PackagePath": "staticwebassets\\pagamentos\\listar.html"
+    },
+    {
+      "Id": "C:\\Users\\Pedro Henrique\\source\\repos\\TrabalhoPraticoPart3\\TrabalhoPraticoPart3\\wwwroot\\veiculos\\criar.html",
+      "PackagePath": "staticwebassets\\veiculos\\criar.html"
+    },
+    {
+      "Id": "C:\\Users\\Pedro Henrique\\source\\repos\\TrabalhoPraticoPart3\\TrabalhoPraticoPart3\\wwwroot\\veiculos\\editar.html",
+      "PackagePath": "staticwebassets\\veiculos\\editar.html"
+    },
+    {
+      "Id": "C:\\Users\\Pedro Henrique\\source\\repos\\TrabalhoPraticoPart3\\TrabalhoPraticoPart3\\wwwroot\\veiculos\\excluir.html",
+      "PackagePath": "staticwebassets\\veiculos\\excluir.html"
+    },
+    {
+      "Id": "C:\\Users\\Pedro Henrique\\source\\repos\\TrabalhoPraticoPart3\\TrabalhoPraticoPart3\\wwwroot\\veiculos\\listar.html",
+      "PackagePath": "staticwebassets\\veiculos\\listar.html"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.TrabalhoPraticoPart3.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.TrabalhoPraticoPart3.props",
+      "PackagePath": "build\\TrabalhoPraticoPart3.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.TrabalhoPraticoPart3.props",
+      "PackagePath": "buildMultiTargeting\\TrabalhoPraticoPart3.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.TrabalhoPraticoPart3.props",
+      "PackagePath": "buildTransitive\\TrabalhoPraticoPart3.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

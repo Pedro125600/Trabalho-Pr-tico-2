@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Veículo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body class="container mt-4">
+
+    <h2>Editar Veículo</h2>
+    <a href="listar.html" class="btn btn-secondary mb-3">← Voltar</a>
+
+    <form id="form"></form>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get("id");
+        const form = document.getElementById("form");
+
+        async function carregar() {
+            const req = await fetch(`/api/veiculos/${id}`);
+            const v = await req.json();
+
+            form.innerHTML = `
+                <label>Modelo</label>
+                <input id="modelo" class="form-control" value="${v.modelo}">
+
+                <label class="mt-2">Ano</label>
+                <input id="ano" type="number" class="form-control" value="${v.anoFabricacao}">
+
+                <label class="mt-2">Quilometragem</label>
+                <input id="km" type="number" class="form-control" value="${v.quilometragem}">
+
+                <label class="mt-2">Placa</label>
+                <input id="placa" class="form-control" value="${v.placa}">
+
+                <label class="mt-2">Cor</label>
+                <input id="cor" class="form-control" value="${v.cor}">
+
+                <label class="mt-2">ID Fabricante</label>
+                <input id="fabricante" type="number" class="form-control" value="${v.idFabricante}">
+
+                <button class="btn btn-success mt-3">Salvar Alterações</button>
+            `;
+        }
+
+        document.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const patch = [];
+
+            patch.push({ op: "replace", path: "/modelo", value: modelo.value });
+            patch.push({ op: "replace", path: "/anoFabricacao", value: Number(ano.value) });
+            patch.push({ op: "replace", path: "/quilometragem", value: Number(km.value) });
+            patch.push({ op: "replace", path: "/placa", value: placa.value });
+            patch.push({ op: "replace", path: "/cor", value: cor.value });
+            patch.push({ op: "replace", path: "/idFabricante", value: Number(fabricante.value) });
+
+            await fetch(`/api/veiculos/${id}`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(patch)
+            });
+
+            alert("Veículo atualizado!");
+            window.location.href = "listar.html";
+        });
+
+        carregar();
+    </script>
+
+</body>
+</html>

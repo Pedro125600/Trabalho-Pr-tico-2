@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Cliente</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body class="container mt-4">
+
+    <h2>Editar Cliente</h2>
+    <a href="listar.html" class="btn btn-secondary mb-3">← Voltar</a>
+
+    <form id="form"></form>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get("id");
+        const form = document.getElementById("form");
+
+        if (!id) {
+            alert("ID inválido!");
+            window.location.href = "listar.html";
+        }
+
+        async function carregar() {
+            const req = await fetch(`/api/clientes/${id}`);
+            const c = await req.json();
+
+            form.innerHTML = `
+                <label>Nome</label>
+                <input class="form-control" id="nome" value="${c.nome}">
+
+                <label class="mt-2">CPF</label>
+                <input class="form-control" id="cpf" value="${c.cpf}">
+
+                <label class="mt-2">Email</label>
+                <input class="form-control" id="email" value="${c.email}">
+
+                <label class="mt-2">Telefone</label>
+                <input class="form-control" id="telefone" value="${c.telefone}">
+
+                <button class="btn btn-success mt-3">Salvar Alterações</button>
+            `;
+        }
+
+        document.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const patch = [];
+
+            if (nome.value) patch.push({ op: "replace", path: "/nome", value: nome.value });
+            if (cpf.value) patch.push({ op: "replace", path: "/cpf", value: cpf.value });
+            if (email.value) patch.push({ op: "replace", path: "/email", value: email.value });
+            if (telefone.value) patch.push({ op: "replace", path: "/telefone", value: telefone.value });
+
+            await fetch(`/api/clientes/${id}`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(patch)
+            });
+
+            alert("Cliente atualizado!");
+            window.location.href = "listar.html";
+        });
+
+        carregar();
+    </script>
+
+</body>
+</html>
